@@ -1,8 +1,8 @@
 package pl.solutiontabs.rules;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import java.awt.Color;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
 class RuleEngineTest {
     @Test void parsesHexColor() { assertEquals(new Color(0x4E9AEB), RuleEngine.parseColor("#4E9AEB")); }

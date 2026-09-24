@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "pl.solutiontabs"
-version = "0.5.3"
+version = "0.5.4"
 
 dependencies {
     intellijPlatform {
@@ -12,7 +12,7 @@ dependencies {
         jetbrainsRuntime()
         testFramework(org.jetbrains.intellij.platform.gradle.TestFrameworkType.Platform)
     }
-    testImplementation("org.junit.jupiter:junit-jupiter:5.11.4")
+    testImplementation("junit:junit:4.13.2")
 }
 
 java {
@@ -23,7 +23,6 @@ tasks {
     withType<JavaCompile> {
         options.encoding = "UTF-8"
     }
-    test { useJUnitPlatform() }
     jar {
         from(rootProject.file("LICENSE")) { into("META-INF") }
     }
