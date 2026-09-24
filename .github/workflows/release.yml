@@ -1,0 +1,52 @@
+name: Release plugin
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Build and publish GitHub Release
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Java 25
+        uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: "25"
+          cache: gradle
+
+      - name: Make Gradle Wrapper executable
+        run: chmod +x gradlew
+
+      - name: Verify tag matches plugin version
+        shell: bash
+        run: |
+          tag_version="${GITHUB_REF_NAME#v}"
+          plugin_version="$(sed -n 's/^version = "\([^"]*\)"/\1/p' build.gradle.kts)"
+          if [[ -z "$plugin_version" || "$tag_version" != "$plugin_version" ]]; then
+            echo "Tag version '$tag_version' does not match build.gradle.kts version '$plugin_version'."
+            exit 1
+          fi
+
+      - name: Test, validate, and build plugin
+        run: ./gradlew clean test verifyPluginStructure buildPlugin --stacktrace --console=plain
+
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" \
+            build/distributions/*.zip \
+            --verify-tag \
+            --title "Vertical Tabs ${GITHUB_REF_NAME#v}" \
+            --generate-notes

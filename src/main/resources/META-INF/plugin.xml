@@ -1,0 +1,21 @@
+<idea-plugin>
+    <id>pl.solutiontabs</id>
+    <name>Vertical Tabs</name>
+    <vendor>Vertical Tabs</vendor>
+
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <toolWindow id="Vertical Tabs"
+                    anchor="left"
+                    icon="/icons/solutionTabs.svg"
+                    factoryClass="pl.solutiontabs.ui.SolutionTabsToolWindowFactory"
+                    canCloseContents="false"/>
+        <postStartupActivity implementation="pl.solutiontabs.tabs.NativeTabsStartupActivity"/>
+        <projectConfigurable parentId="editor"
+                             id="pl.solutiontabs.settings"
+                             displayName="Vertical Tabs"
+                             instance="pl.solutiontabs.settings.SolutionTabsConfigurable"/>
+        <projectService serviceImplementation="pl.solutiontabs.settings.SolutionTabsSettings"/>
+    </extensions>
+</idea-plugin>
