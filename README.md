@@ -87,8 +87,8 @@ The repository includes a GitHub Actions release workflow. Update the version in
 commit the change, and push a matching tag:
 
 ```bash
-git tag v0.5.4
-git push origin v0.5.4
+git tag v0.5.5
+git push origin v0.5.5
 ```
 
 The workflow runs the tests and plugin validation, builds the distribution, creates a GitHub Release,

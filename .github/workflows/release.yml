@@ -41,6 +41,16 @@ jobs:
       - name: Test, validate, and build plugin
         run: ./gradlew clean test verifyPluginStructure buildPlugin --stacktrace --console=plain
 
+      - name: Upload test reports on failure
+        if: failure()
+        uses: actions/upload-artifact@v6
+        with:
+          name: test-reports
+          path: |
+            build/reports/tests/test/
+            build/test-results/test/
+          if-no-files-found: ignore
+
       - name: Create GitHub Release
         env:
           GH_TOKEN: ${{ github.token }}

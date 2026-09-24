@@ -4,13 +4,12 @@ plugins {
 }
 
 group = "pl.solutiontabs"
-version = "0.5.4"
+version = "0.5.5"
 
 dependencies {
     intellijPlatform {
         rider("2026.2.2") { useInstaller = false }
         jetbrainsRuntime()
-        testFramework(org.jetbrains.intellij.platform.gradle.TestFrameworkType.Platform)
     }
     testImplementation("junit:junit:4.13.2")
 }
@@ -28,6 +27,12 @@ tasks {
     }
     patchPluginXml {
         sinceBuild.set("261")
+    }
+    test {
+        testLogging {
+            events("passed", "skipped", "failed")
+            exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
+        }
     }
 }
 
