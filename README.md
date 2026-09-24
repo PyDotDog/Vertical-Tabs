@@ -8,7 +8,10 @@ Vertical Tabs is an open-files navigator for JetBrains IDEs. It docks on the lef
 groups files by their owning IDE module or .NET project, and gives each group a consistent color. It can replace the IDE's
 native editor tab bar while preserving normal editor behavior.
 
-![Vertical Tabs displaying color-coded .NET project groups](docs/images/vertical-tabs-screenshot.png)
+<p align="center">
+  <img src="docs/images/vertical-tabs-screenshot.png"
+       alt="Vertical Tabs displaying color-coded .NET project groups">
+</p>
 
 ## Features
 
