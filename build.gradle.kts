@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "pl.solutiontabs"
-version = "0.5.2"
+version = "0.5.3"
 
 dependencies {
     intellijPlatform {
